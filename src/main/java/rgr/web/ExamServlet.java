@@ -2,6 +2,7 @@ package rgr.web;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.TimeZone;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,6 +86,7 @@ public class ExamServlet extends AbstractServlet<Exam> {
 	protected void update(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        format.setTimeZone(TimeZone.getTimeZone("GMT"));
 		long id = Long.parseLong(request.getParameter("id"));
 		int grade = Integer.parseInt(request.getParameter("grade"));
 		String examDayString = request.getParameter("examDay");
@@ -92,7 +94,6 @@ public class ExamServlet extends AbstractServlet<Exam> {
 		try {
 			examDay = format.parse(examDayString);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		long disciplineId = Long.parseLong(request.getParameter("disciplineId"));
